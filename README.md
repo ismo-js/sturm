@@ -1,2 +1,1 @@
-# sturm
-Universal functional stream handling
+doc/index.md

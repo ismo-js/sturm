@@ -1,0 +1,1 @@
+doc/law/COVENANT.md
