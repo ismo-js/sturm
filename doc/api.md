@@ -1,47 +1,84 @@
-## Sample
-`subject::smp(sampler)`
+## Fill
+`subject::fill()`
 
-Produces the latest value of `subject` *only* when `sampler` triggers.
+Produces the latest value till the next value arrives.
 
 ### Example
 ```js
-> [a,-,-,b,c,-,-]::smp([-,x,-,-,x,x])
-[-,a,-,-,c,c]
+> [a,-,-,b,c,-,-]::fill()
+[a,a,a,b,c,c...>
 
-> [a,b,c,d,e]::smp([a,-,b,-,c,-,d])
-[a,-,c,-,e,-,e]
+> [a,b,c,d,e]::fill()
+[a,b,c,d,e,e...>
+
+> []::fill()
+[> //endless stream
 ```
 
 
-## Mask
-`subjects::mask(funcs)`
+## And
+`subjects::and()`
 
-`subjects` is a stream of streams. `mask` consults the active mask function from the stream `funcs` for every value.
-
-A mask function takes two arguments ...
-
-1. Binary number. Each digit filled with `1` stands for an stream existing in `subjects` providing an active value; so `1011` means that the 2nd stream of 4 potential streams did not provide any value at the given time.
-2. Binary number. Each digit filled with `1` stands for an stream existing in `subjects`, no matter if there is an active value; so `1111` means that there are 4 streams given without "space" inbetween.
-
-... and returns a number:
-
-* Binary number.
-  * If `0`, nothing gets produced at this point in time in the result stream.
-  * Otherwise, there's just one digit being `1`, the other digits are filled with `0`, where `1` indicates a specific subject. In that case, the active value from the corresponding subject is produced to the result stream.
+Produces each stream of `subjects`, but each of them itself only produces a value when *all* other `subjects` produce something at the same time. When *one* `subject` ends, every stream ends.
 
 ### Example
 ```js
 > [
->   [a,b,c,-,-,a,b,c],
->   [b,b,-,d,b,b,-,d,b],
-> ]::msk([(filled, full)=>
->   filled === full ? 1 : 0 // non-exclusive or
-> ]::smp(top))
-[a,b,-,-,-,a,-,c]
+>   [a,b,c,-,a,b,c],
+>   [b,b,-,d,b,-,d,b],
+> ]::and()
+[
+  [a,b,-.-,a,-,c],
+  [b,b,-,-,b,-,d],
+]
+```
+
+## Exclusive Or (`xor`)
+`subjects::xor()`
+
+### Example
+```js
+> [
+>   [a,-,b,c],
+>   [p,-,-,q,r],
+> ]
+[
+  [-,-,b,-],
+  [-,-,-,-,r],
+]
 ```
 
 
-## Delay
-`subject::delay(alignment)`
+## Merge
+`subjects::merge()`
 
-Produces all values of `subject`, but at anther time than `subject` does. Only after the `alignment` stream ends, values get produced in the result stream.
+Produces a value when *any* of the `subjects` produces. When there are multiple values at the same point of time, the first `subject` wins. Ends when *all* `subjects` end.
+
+### Example
+```js
+> [
+>   [-,a,b],
+>   [-,-,p,q],
+> ]::merge()
+[-,a,b,q]
+```
+
+
+## Align
+`subjects::align()`
+
+Produces each stream of `subjects`, but each of them starts not until the stream *before* has finished.
+
+### Example
+```js
+> [
+>   [a,b,a],
+>   [b,a,b],
+>   [a,b,a],
+> ]::align()
+[
+  [a,b,a],
+  [-,-,-,b,a,b],
+  [-,-,-,-,-,-,a,b,a],
+]
+```
