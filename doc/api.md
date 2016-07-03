@@ -1,27 +1,36 @@
-## Fill
+# sтurm API
+```
+    ___          ___    _____    _   _    _ ___   _ _ _
+   / _ \        / __⟩  |_   _|  | | | |  | ˇ__/  | ˇ ˇ \
+  | |.| |       \__ \    | |    | `–´ |  | |     | | | |
+   \_\_/        ⟨___/    |_|    `.___.´  |_|     |_|_|_|
+
+```
+
+### Fill
 `subject::fill()`
 
 Produces the latest value till the next value arrives.
 
-### Example
+#### Example
 ```js
 > [a,-,-,b,c,-,-]::fill()
-[a,a,a,b,c,c...>
+[a,a,a,b,c,c…>
 
 > [a,b,c,d,e]::fill()
-[a,b,c,d,e,e...>
+[a,b,c,d,e,e…>
 
 > []::fill()
 [> //endless stream
 ```
 
 
-## And
+### And
 `subjects::and()`
 
 Produces each stream of `subjects`, but each of them itself only produces a value when *all* other `subjects` produce something at the same time. When *one* `subject` ends, every stream ends.
 
-### Example
+#### Example
 ```js
 > [
 >   [a,b,c,-,a,b,c],
@@ -33,10 +42,10 @@ Produces each stream of `subjects`, but each of them itself only produces a valu
 ]
 ```
 
-## Exclusive Or (`xor`)
+### Exclusive Or (`xor`)
 `subjects::xor()`
 
-### Example
+#### Example
 ```js
 > [
 >   [a,-,b,c],
@@ -49,12 +58,12 @@ Produces each stream of `subjects`, but each of them itself only produces a valu
 ```
 
 
-## Merge
+### Merge
 `subjects::merge()`
 
 Produces a value when *any* of the `subjects` produces. When there are multiple values at the same point of time, the first `subject` wins. Ends when *all* `subjects` end.
 
-### Example
+#### Example
 ```js
 > [
 >   [-,a,b],
@@ -64,12 +73,12 @@ Produces a value when *any* of the `subjects` produces. When there are multiple 
 ```
 
 
-## Align
+### Align
 `subjects::align()`
 
 Produces each stream of `subjects`, but each of them starts not until the stream *before* has finished.
 
-### Example
+#### Example
 ```js
 > [
 >   [a,b,a],
