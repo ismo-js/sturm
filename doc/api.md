@@ -2,8 +2,8 @@
 ```
      ___          ____    _____    _   _    _ ___   _ ______
     / _ \        / ___⟩  |_   _|  | | | |  | ˇ__/  | ˇ      \
-   | |.| |       \__  \    | |    | `–´ |  | |     | ,^. ,^. |
-    \_\_/        ⟨____/    |_|    `.___.´  |_|     |_| |_| |_|
+   ⟨ ⟨.⟩ ⟩       \__  \    | |    | `–´ |  | |     | ,^. ,^. |
+    \_\_/        ⟨____/    |_|    `.___,´  |_|     |_| |_| |_|
 
 ```
 
@@ -26,8 +26,8 @@ Produces the latest value till the next value arrives and never ends.
 ```
 
 
-### Align
-`subjects::align()`
+### Succeed
+`subjects::succeed()`
 
 Produces each stream of `subjects`, but each of them starts not until the stream *before* has finished.
 
@@ -37,14 +37,17 @@ Produces each stream of `subjects`, but each of them starts not until the stream
 >   [a,b,a],
 >   [b,a,b],
 >   [a,b,a],
-> ]::align()
+> ]::succeed()
 [
   [a,b,a],
   [-,-,-,b,a,b],
   [-,-,-,-,-,-,a,b,a],
 ]
-```
 
+// how to eliminate pauses between values
+> [x,x]::succeed()[1]
+x’ //x, but all values succeeding each other directly.
+```
 
 ## Logics
 ### And
@@ -85,7 +88,7 @@ Produces each stream of `subjects`, but each of them itself only produces a valu
 ### Map
 `subjects::map()`
 
-TODO which behavior?
+Applies `subject[0][x]` to `subject[1][x]`; applies the resulting function on `subject[2][x]`… Does nothing at points of time where not all values are given. Ends when the shortest `subject` ends.
 
 #### Example
 ```js
@@ -97,9 +100,14 @@ TODO which behavior?
 [-,b]
 ```
 
+### Reduce
+`subjects::reduce()`
+
+The same as `map`, but finally applies the result of `subject[n-1][x](subject[n][x])` on the final result of the application at the last point of time. Ignores points of time where not all values are given. Ends when the shortest `subject` ends.
+
 
 ## Finings
-//### Merge
+### Merge
 `subjects::merge()`
 
 Produces a value when *any* of the `subjects` produces. When there are multiple values at the same point of time, the first `subject` wins. Ends when *all* `subjects` end.
