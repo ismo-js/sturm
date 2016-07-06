@@ -157,7 +157,7 @@ Produces each stream of `subjects`, but each of them itself only produce a value
 > [
 >   [a,-,b,c],
 >   [p,-,-,q,r],
-> ]
+> ]::xor()
 [
   [-,-,b,-],
   [-,-,-,-,r],
@@ -165,7 +165,7 @@ Produces each stream of `subjects`, but each of them itself only produce a value
 ```
 
 
-### unique
+### Unique
 `subjects::unique()`
 
 Produces each `subject`, but each of them itself only produce the value at a specific point of time if it's unique compared to all other values at the given point of time.
@@ -175,7 +175,7 @@ Produces each `subject`, but each of them itself only produce the value at a spe
 > [
 >   [a,-,b,c],
 >   [b,-,-,c,a],
-> ]
+> ]::unique()
 [
   [a,-,b,-],
   [b,-,-,-,a],
@@ -195,7 +195,7 @@ Produces a stream at any point of time where at least one `subject` has a value.
 >   [a,b,a]
 >   [c,d,d],
 >   [e,e,f,g],
-> ]
+> ]::cross()
 [
   [a,c,e],
   [b,d,e],
@@ -215,7 +215,7 @@ Applies `subject[0][x]` to `subject[1][x]`; applies the resulting function on `s
 >   [(x,y)=> x]::fill(),
 >   [a,b],
 >   [-,c,d],
-> ]
+> ]::map()
 [-,b]
 ```
 
@@ -230,7 +230,7 @@ The same as `map`, but the return value isn't produced, but it's boolean value i
 > [
 >   [x=> x%2]::fill(),
 >   [1,5,8],
-> ]
+> ]::filter()
 [1,5,-]
 ```
 
