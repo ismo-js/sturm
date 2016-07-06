@@ -1,0 +1,9 @@
+{
+  "name": "sturm-pkg",
+  "private": true,
+  "dependencies": {},
+  "devDependencies": {
+    "gulp": "~3.9.1",
+    "gulp-yaml": "~1.0.1"
+  }
+}

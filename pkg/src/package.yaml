@@ -1,0 +1,15 @@
+name: swertz
+version: 0.0.0
+description: Christian Swertz
+author:
+- "Te Standby <testandby@gmail.com>"
+- "Christian Swertz <christian@swertz.at>"
+license: LGPLv3
+private: true
+
+main: lib/index.js
+repository: "gitlab:lerndorf/swertz"
+dependencies: {}
+devDependencies:
+  gulp: "~3.9.1"
+  gulp-yaml: "~1.0.1"
