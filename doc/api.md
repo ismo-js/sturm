@@ -128,6 +128,20 @@ Produces each stream of `subjects`, but each of them itself only produces a valu
 ]
 ```
 
+
+### Same
+`subjects::same()`
+
+Produces true if the all `subjects` have the same //TODO does it make sense to have this function?
+
+#### Example
+```js
+// how to test emptyness
+> [[x, x]::succeed()[1], []]::same()
+[true]
+```
+
+
 ## Mappings
 ### Cross
 `subjects::cross()`
