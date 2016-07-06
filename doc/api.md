@@ -7,59 +7,6 @@
 
 ```
 
-## Origins
-### Indexed
-```js
-> {[0]: a, [2]: b}
-[a,-,b,-…>
-```
-
-### Lengthened
-```js
-> {length: 3}
-[-,-,-]
-```
-
-### Iterator
-```js
-> {
->   next: ()=> {done: true}
-> }
-[]
-
-> (function* () {})()
-[]
-```
-
-### Iterable
-```js
-> {
->   [Symbol.iterator]: ()=> {
->     next: ()=> {done: true}
->   }
-> }
-[]
-```
-
-### Promise
-```js
-> new Promise(rsv=> {
->   setInterval(()=> rsv(true), 1234)
-> })
-[-…,true]
-```
-
-### Emitter
-```js
-> new Emitter(
->   pdc=> setInterval(()=> pdc(true), 1234),
->   id=> clearInterval(id)
-> )
-```
-
-### Observable
-
-
 ## Ranges
 ### Fill
 `subject::fill()`
