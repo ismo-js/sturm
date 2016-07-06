@@ -10,12 +10,14 @@
 ## Origins
 ### Indexed
 ```js
-> {[0]: a, [8]: b}
+> {[0]: a, [2]: b}
+[a,-,b,-…>
 ```
 
 ### Lengthened
 ```js
-> {length: 5}
+> {length: 3}
+[-,-,-]
 ```
 
 ### Iterator
@@ -23,6 +25,7 @@
 > {
 >   next: ()=> {done: true}
 > }
+[]
 ```
 
 ### Iterable
@@ -32,6 +35,15 @@
 >     next: ()=> {done: true}
 >   }
 > }
+[]
+```
+
+### Promise
+```js
+> new Promise(rsv=> {
+>   setInterval(()=> rsv(true), 1234)
+> })
+[-…,true]
 ```
 
 
@@ -50,7 +62,7 @@ Produces the latest value till the next value arrives and never ends.
 [a,b,c,d,e,e…>
 
 > []::fill()
-[> //endless stream
+[-> //endless stream
 ```
 
 
