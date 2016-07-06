@@ -1,0 +1,4 @@
+// @flow
+
+class Buffer {
+}
