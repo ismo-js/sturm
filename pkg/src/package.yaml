@@ -1,14 +1,13 @@
-name: swertz
+name: sturm
 version: 0.0.0
-description: Christian Swertz
+description: Universal functional stream handling
 author:
 - "Te Standby <testandby@gmail.com>"
-- "Christian Swertz <christian@swertz.at>"
 license: LGPLv3
 private: true
 
 main: lib/index.js
-repository: "gitlab:lerndorf/swertz"
+repository: "ismo-js/sturm"
 dependencies: {}
 devDependencies:
   gulp: "~3.9.1"
