@@ -1,3 +1,6 @@
 [submodule ".cfg"]
 	path = .cfg
 	url = https://github.com/n-lang/.gitignore.git
+[submodule "doc/law"]
+	path = doc/law
+	url = https://github.com/ismo-js/law.git
