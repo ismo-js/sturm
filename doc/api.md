@@ -112,7 +112,7 @@ Produces each stream of `subjects`. At points of time where there are values in 
 ### And
 `subjects::and()`
 
-Produces each stream of `subjects`, but each of them itself only produces a value when *all* other `subjects` produce something at the same time. When *one* `subject` ends, every stream ends.
+Produces each stream of `subjects`, but each of them itself only produce a value when *all* other `subjects` produce something at the same time. When *one* `subject` ends, every stream ends.
 
 #### Example
 ```js
@@ -133,7 +133,7 @@ x’ // x, but all values replaced with a
 ### Exclusive Or (`xor`)
 `subjects::xor()`
 
-Produces each stream of `subjects`, but each of them itself only produces a value when *no* other `subject` produces something at the same time.
+Produces each stream of `subjects`, but each of them itself only produce a value when *no* other `subject` produces something at the same time.
 
 #### Example
 ```js
@@ -148,16 +148,21 @@ Produces each stream of `subjects`, but each of them itself only produces a valu
 ```
 
 
-### Same
-`subjects::same()`
+### unique
+`subjects::unique()`
 
-Produces true if the all `subjects` have the same //TODO does it make sense to have this function?
+Produces each `subject`, but each of them itself only produce the value at a specific point of time if it's unique compared to all other values at the given point of time.
 
 #### Example
 ```js
-// how to test emptyness
-> [[x, x]::succeed()[1], []]::same()
-[true]
+> [
+>   [a,-,b,c],
+>   [b,-,-,c,a],
+> ]
+[
+  [a,-,b,-],
+  [b,-,-,-,a],
+]
 ```
 
 
@@ -215,6 +220,19 @@ The same as `map`, but finally applies the result of `subject[n-1][x](subject[n]
 
 
 ## Finings
+### Blank
+`subject::blank()`
+
+Returns `true` if the stream is blank. A blank stream ends immediately.
+
+```js
+> {length: 0}::blank()
+true
+
+> []::blank()
+true
+```
+
 ### Combine
 `subjects::combine()`
 
