@@ -7,6 +7,34 @@
 
 ```
 
+## Origins
+### Indexed
+```js
+> {[0]: a, [8]: b}
+```
+
+### Lengthened
+```js
+> {length: 5}
+```
+
+### Iterator
+```js
+> {
+>   next: ()=> {done: true}
+> }
+```
+
+### Iterable
+```js
+> {
+>   [Symbol.iterator]: ()=> {
+>     next: ()=> {done: true}
+>   }
+> }
+```
+
+
 ## Ranges
 ### Fill
 `subject::fill()`
@@ -65,6 +93,10 @@ Produces each stream of `subjects`, but each of them itself only produces a valu
   [a,b,-.-,a,-,c],
   [b,b,-,-,b,-,d],
 ]
+
+// how to map to constant value
+> [[a]::fill(), x]::and()[0]
+x’ // x, but all values replaced with a
 ```
 
 ### Exclusive Or (`xor`)
@@ -85,10 +117,16 @@ Produces each stream of `subjects`, but each of them itself only produces a valu
 ```
 
 ## Mappings
+### Cross
+`subjects::cross()`
+
+Produces a stream at any point of time where at least one `subject` has a value. Each of these stream contains the value of all `subjects` at this specific point of time.
+
+
 ### Map
 `subjects::map()`
 
-Applies `subject[0][x]` to `subject[1][x]`; applies the resulting function on `subject[2][x]`… Does nothing at points of time where not all values are given. Ends when the shortest `subject` ends.
+Applies `subject[0][x]` to `subject[1][x]`; applies the resulting function on `subject[2][x]`… Produces the final results of these applications and `NIL` at points of time where not all values are given. Ends when a value gets mapped to `FIN`.
 
 #### Example
 ```js
@@ -100,10 +138,35 @@ Applies `subject[0][x]` to `subject[1][x]`; applies the resulting function on `s
 [-,b]
 ```
 
-### Reduce
-`subjects::reduce()`
 
-The same as `map`, but finally applies the result of `subject[n-1][x](subject[n][x])` on the final result of the application at the last point of time. Ignores points of time where not all values are given. Ends when the shortest `subject` ends.
+### Filter
+`subjects::filter()`
+
+The same as `map`, but the return value isn't produced, but it's boolean value is used to decide if the original value should be left in the result stream or not.
+
+#### Example
+```js
+> [
+>   [x=> x%2]::fill(),
+>   [1,5,8],
+> ]
+[1,5,-]
+```
+
+
+### Reduce
+`subjects::reduce(initial)`
+
+The same as `map`, but finally applies the result of `subject[n-1][x](subject[n][x])` on the final result of the application at the last point of time. If this memorized result isn't given, `reduce` starts out with `initial`. Ignores points of time where not all values are given. Ends when the shortest `subject` ends.
+
+#### Example
+```js
+> [
+>   [(n, o)=> n+o]::fill(),
+>   [1,2,3],
+> ]::reduce(1)
+[2,4,7]
+```
 
 
 ## Finings
@@ -119,4 +182,8 @@ Produces a value when *any* of the `subjects` produces. When there are multiple 
 >   [-,-,p,q],
 > ]::merge()
 [-,a,b,q]
+
+// how to resolve promises
+> [pr1, pr2]::succeed()::merge()
+[-,-,-,result[pr1],result[pr2]]
 ```
