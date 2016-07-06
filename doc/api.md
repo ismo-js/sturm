@@ -89,6 +89,25 @@ Produces each stream of `subjects`, but each of them starts not until the stream
 x’ //x, but all values succeeding each other directly.
 ```
 
+
+### Dispose
+`subjects::dispose()`
+
+Produces each stream of `subjects`. At points of time where there are values in multiple `subjects`, it buffers the value of the later stream and produces it at a point of time where no `subject` produces.
+
+#### Example
+```js
+> [
+>   [-,a,b,-,-,-,b],
+>   [-,a,c,-,-,-,b],
+> ]::dispose()
+[
+  [-,a,-,b,-,-,b],
+  [-,-,a,-,c,-,-,b],
+]
+```
+
+
 ## Logics
 ### And
 `subjects::and()`
@@ -196,8 +215,8 @@ The same as `map`, but finally applies the result of `subject[n-1][x](subject[n]
 
 
 ## Finings
-### Merge
-`subjects::merge()`
+### Combine
+`subjects::combine()`
 
 Produces a value when *any* of the `subjects` produces. When there are multiple values at the same point of time, the first `subject` wins. Ends when *all* `subjects` end.
 
@@ -206,10 +225,10 @@ Produces a value when *any* of the `subjects` produces. When there are multiple 
 > [
 >   [-,a,b],
 >   [-,-,p,q],
-> ]::merge()
+> ]::combine()
 [-,a,b,q]
 
 // how to resolve promises
-> [pr1, pr2]::succeed()::merge()
+> [pr1, pr2]::dispose()::combine()
 [-,-,-,result[pr1],result[pr2]]
 ```
