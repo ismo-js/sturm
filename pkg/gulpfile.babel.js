@@ -9,5 +9,5 @@ export function yamly() {
 }
 
 export default async function build(d) {
-  return await g.parallel(yamly)
+  return await g.parallel(yamly)()
 }
