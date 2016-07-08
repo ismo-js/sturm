@@ -1,21 +1,15 @@
-const g = require("gulp")
-const yaml = require("gulp-yaml")
-const babel = require("gulp-babel")
+import g from "gulp"
+import yaml from "gulp-yaml"
+import babel from "gulp-babel"
 
-g.task("pkg-yaml", ()=> g
-  .src("src/*.yaml")
-  .pipe(yaml({space: 2}))
-  .pipe(gulp.dest("lib/"))
+export function yamly() {
+  g
+    .src("src/*.yaml")
+    .pipe(yaml({space: 2}))
+    .pipe(gulp.dest("lib/"))
 )
 
-g.task("bablify" ()=> g
-  .src("src/*.js")
-  .pipe(babel())
-  .pipe(gulp.dest('lib/'))
-)
-
-/*TODO write rules to convert json back to yaml if json has changed*/
-
-g.task("watch", ()=> g
-  .watch("src/*", ["pkg-yaml", "bablify"])
-)
+export default function build() {
+  g
+    .parallel(yamly)
+}

@@ -10,6 +10,6 @@ main: lib/index.js
 repository: ismo-js/sturm
 dependencies: {}
 devDependencies:
-  gulp: ~3.9.1
+  gulp: github:gulpjs/gulp#4.0
   gulp-yaml: ~1.0.1
   gulp-ava: ~0.12.1
