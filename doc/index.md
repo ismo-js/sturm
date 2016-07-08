@@ -1,5 +1,13 @@
 # sтurm
-Universal functional stream handling
+```
+     ___          ____    _____    _   _    _ ___   _ ______
+    / _ \        / ___⟩  |_   _|  | | | |  | ˇ__/  | ˇ      \
+   ⟨ ⟨.⟩ ⟩       \__  \    | |    | `–´ |  | |     | ,^. ,^. |
+    \_\_/        ⟨____/    |_|    `.___,´  |_|     |_| |_| |_|
+
+```
+
+*Universal functional stream handling*
 
 ## Status
 `tl;dr:` Planning phase. (Nothing done yet – stay tuned.)
