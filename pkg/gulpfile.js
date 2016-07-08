@@ -1,5 +1,6 @@
 const g = require("gulp")
 const yaml = require("gulp-yaml")
+const babel = require("gulp-babel")
 
 g.task("pkg-yaml", ()=> g
   .src("src/*.yaml")

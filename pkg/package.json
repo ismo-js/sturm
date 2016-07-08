@@ -4,6 +4,7 @@
   "dependencies": {},
   "devDependencies": {
     "gulp": "~3.9.1",
-    "gulp-yaml": "~1.0.1"
+    "gulp-yaml": "~1.0.1",
+    "gulp-babel": "~6.1.2"
   }
 }
