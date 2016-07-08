@@ -1,7 +1,8 @@
-import gulp from "gulp"
+import g from "gulp"
 import ava from "gulp-ava"
 
-gulp.task("test", ()=> gulp
+g.task("test", ()=> g
   .src("src/*.ava.js")
   .pipe(ava())
+  .pipe(g.dest('lib/'))
 )

@@ -1,14 +1,20 @@
-const gulp = require("gulp")
+const g = require("gulp")
 const yaml = require("gulp-yaml")
 
-gulp.task("pkg-yaml", ()=> gulp
+g.task("pkg-yaml", ()=> g
   .src("src/*.yaml")
   .pipe(yaml({space: 2}))
   .pipe(gulp.dest("lib/"))
 )
 
+g.task("bablify" ()=> g
+  .src("src/*.js")
+  .pipe(babel())
+  .pipe(gulp.dest('lib/'))
+)
+
 /*TODO write rules to convert json back to yaml if json has changed*/
 
-gulp.task("watch", ()=> gulp
-  .watch("src/*.yaml", ["pkg-yaml"])
+g.task("watch", ()=> g
+  .watch("src/*", ["pkg-yaml", "bablify"])
 )
