@@ -1,10 +1,1 @@
-{
-  "presets": [
-    "es2015-node5",
-    "stage-1"
-  ],
-  "plugins": [
-    "syntax-flow"
-  ],
-  "sourceMaps": true
-}
+subs/dev/pkg/lib/.babelrc

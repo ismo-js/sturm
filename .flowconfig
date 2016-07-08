@@ -1,7 +1,1 @@
-[ignore]
-./lib/
-
-[options]
-module.use_strict=true
-munge_underscores=true
-esproposal.class_static_fields=enable
+subs/dev/pkg/lib/.flowconfig
