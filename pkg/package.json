@@ -3,6 +3,7 @@
   "private": true,
   "dependencies": {
     "gulp": "github:gulpjs/gulp#4.0",
+    "gulp-yaml": "~1.0.1",
     "babel-cli": "~6.5.1",
     "babel-core": "~6.7.2",
     "babel-plugin-syntax-flow": "~6.5.0",
