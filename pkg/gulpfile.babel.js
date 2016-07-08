@@ -6,7 +6,7 @@ export function yamly() {
     .src("src/*.yaml")
     .pipe(yaml({space: 2}))
     .pipe(gulp.dest("lib/"))
-)
+}
 
 export default function build() {
   g
