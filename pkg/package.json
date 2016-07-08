@@ -1,10 +1,12 @@
 {
   "name": "sturm-pkg",
   "private": true,
-  "dependencies": {},
-  "devDependencies": {
-    "gulp": "~3.9.1",
-    "gulp-yaml": "~1.0.1",
-    "gulp-babel": "~6.1.2"
+  "dependencies": {
+    "gulp": "github:gulpjs/gulp#4.0",
+    "babel-cli": "~6.5.1",
+    "babel-core": "~6.7.2",
+    "babel-plugin-syntax-flow": "~6.5.0",
+    "babel-preset-es2015-node5": "~1.2.0",
+    "babel-preset-stage-1": "~6.5.0"
   }
 }
