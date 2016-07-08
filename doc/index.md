@@ -10,7 +10,7 @@
 *Universal functional stream handling*
 
 ## Status
-`tl;dr:` Planning phase. (Nothing done yet – stay tuned.)
+`tl;dr:` Planning phase. (Almost nothing done yet – stay tuned.)
 
 I'm currently bootstrapping the project, designing the API and starting building a API demo.
 
@@ -24,5 +24,5 @@ Fast and universal (even more abstract than `most.js`) stream handling.
 Brainstorming and planning phase. Contact me respectively us via `testandby@gmail.com` to discuss and let me know your opinion on how to make the world of streams a better one.
 
 ## License
-- *Source Code:* GPL (version 3)
-- *Documentation:* CC-AT-NC-SA (version 4)
+- *Source Code:* LGPL (version 3)
+- *Documentation:* CC-BY-NC-SA (version 4)
