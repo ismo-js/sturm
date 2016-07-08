@@ -1,6 +1,10 @@
-import g from "gulp"
+/*import g from "gulp"
 import yaml from "gulp-yaml"
-import babel from "gulp-babel"
+*/
+
+
+const g = require("gulp")
+const yaml = require("gulp-yaml")
 
 export function yamly() {
   g
