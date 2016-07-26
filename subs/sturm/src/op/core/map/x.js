@@ -6,16 +6,19 @@ export default class X {
   }
 
   async *[Symbol.iterator]() {
-    await this.scan(this.meta$, async (a$, f$)=> {
-      //TODO scan f$, a$ at the same time
+    await this.multiscan([this.meta$], async ([a$], f$)=> {
+      void 0
     }, [e=> e])
   }
 
-  async scan(o$, f, seed) {
-    let res = seed
-    for (let e$ of o$) {
-      const e = await e$
-      NIL !== e && res = await f(e, res)
-    }
+  async multiscan(o$s, f, seed) {
+    const multinext_ = ()=> o$s.map(o$=> o$.next())
+    const hasEnd = es=> -1 < es.indexOf(END)
+
+    for (
+      let es, res = seed;
+      hasEnd(es = multinext_());
+      res = await f(es, res)
+    );
   }
 }
