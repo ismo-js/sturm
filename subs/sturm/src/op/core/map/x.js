@@ -1,14 +1,20 @@
 import ac from "accessies"
 
 export default class X {
-  constructor(meta$) {
-    ac.g(this, {meta$})
+  constructor(sbj$$) {
+    ac.g(this, {sbj$$})
   }
 
   async *[Symbol.iterator]() {
-    await this.multiscan([this.meta$], async ([a$], f$)=> {
-      void 0
-    }, [e=> e])
+    await this.multiscan(
+      [this.sbj$$],
+      async ([a$], f$)=> await this.multiscan(
+        [f$, a$],
+        async [f, a]=> void 0, //TODO
+        void 0, //TODO
+      ),
+      [e=> e],
+    )
   }
 
   async multiscan(o$s, f, seed) {
@@ -17,8 +23,8 @@ export default class X {
 
     for (
       let es, res = seed;
-      hasEnd(es = multinext_());
-      res = await f(es, res)
+      hasEnd(es = multinext_()); //TODO stop when ALL end, not when ONE ends.
+      res = await f(es, res) //TODO concurrency instead of pairing together.
     );
   }
 }
