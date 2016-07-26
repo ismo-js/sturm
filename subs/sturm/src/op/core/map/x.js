@@ -10,8 +10,8 @@ export default class X {
       [this.sbj$$],
       async ([a$], f$)=> await this.multiscan(
         [f$, a$],
-        async [f, a]=> void 0, //TODO
-        void 0, //TODO
+        async ([f, a], l)=> [...l, f(a)],
+        [],
       ),
       [e=> e],
     )
@@ -19,11 +19,11 @@ export default class X {
 
   async multiscan(o$s, f, seed) {
     const multinext_ = ()=> o$s.map(o$=> o$.next())
-    const hasEnd = es=> -1 < es.indexOf(END)
+    const allEnded = es=> es.every(e=> END === e)
 
     for (
       let es, res = seed;
-      hasEnd(es = multinext_()); //TODO stop when ALL end, not when ONE ends.
+      allEnded(es = multinext_());
       res = await f(es, res) //TODO concurrency instead of pairing together.
     );
   }
