@@ -1,1 +1,1 @@
-doc/index.md
+doc/doc/sturm/index.md

@@ -4,3 +4,6 @@
 [submodule ".base"]
 	path = .base
 	url = https://github.com/ismo-js/base.git
+[submodule "doc"]
+	path = doc
+	url = https://github.com/ismo-js/doc.git
