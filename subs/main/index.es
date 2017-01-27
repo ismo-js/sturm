@@ -1,34 +1,24 @@
 export * from "syms"
 
+import * from "./prm"
+
 const Ob = Object
 const merge = a=> Ob.assign({}, ...a)
 
-class Prm {
-    static cat(err) {
-        throw err
+class Sturm extends Prm {
+    static adapt(a, b) {
+
     }
 
-    async then(clb, cat = Prm.cat) {
-        const prm =
-              clb
-            ? Promise.race(this[LEN], this[ERR])
-            : this[ERR]
-        await prm
+    constructor(a) {
 
-        const err = this.state[ERR]
-        return err ? cat(err) : clb(this.state)
-    }
-
-    async catch(cat) {
-        return this.then(void 0, cat)
     }
 }
 
-class Sturm extends Prm {
-    constructor() {
-    }
-
-    async then(clb, cat) {
-
-    }
+function sturm(...a) {
+    const res =
+          new.target
+        ? new Sturm(a)
+        : Sturm.adapt(this, a)
+    return res
 }
