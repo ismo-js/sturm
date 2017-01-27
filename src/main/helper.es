@@ -1,6 +1,7 @@
 export const Fn = Function
 export const Ob = Object
 export const Ar = Array
+export const Pr = Promise
 
 export const flat = a=> Ob.assign({}, ...a)
 

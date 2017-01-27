@@ -1,12 +1,7 @@
 export * from "syms"
 
-import * from "./prm"
-
-const Ob = Object
-const merge = a=> Ob.assign({}, ...a)
-
-class Sturm extends Prm {
-    static adapt(a, b) {
+export class Sturm extends Prm {
+    static chain(a, b) {
 
     }
 
@@ -17,8 +12,8 @@ class Sturm extends Prm {
 
 function sturm(...a) {
     const res =
-          new.target
+          new.target //"called using `new`?"
         ? new Sturm(a)
-        : Sturm.adapt(this, a)
+        : new Sturm(this).chain(a)
     return res
 }

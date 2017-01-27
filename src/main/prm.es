@@ -1,4 +1,4 @@
-export class Prm {
+class Prm {
     static cat(err) {
         throw err
     }
