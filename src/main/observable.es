@@ -1,17 +1,21 @@
 export class Observable {
-    static chain(a, b) {
+    static of(...a) {
+        return Observable.from(a)
+    }
 
+    static from(a) {
+        return new Observable()
     }
 
     constructor(src) {
 
     }
 
-    function of(...a) {
-        const res =
-              new.target //"called using `new`?"
-            ? new Observable(a)
-            : new Observable(this).chain(a)
-        return res
+    chain(a) {
+
+    }
+
+    subscribe(observer) {
+    
     }
 }

@@ -1,22 +1,12 @@
 export * from "syms"
 
-const Ob = Object
-const merge = a=> Ob.assign({}, ...a)
+export function Sturm(...a) {
+    const aFrom = Observable.from(a)
 
-class Sturm extends Prm {
-    static adapt(a, b) {
-
-    }
-
-    constructor(a) {
-
-    }
-}
-
-function sturm(...a) {
-    const res =
+    return
           new.target
-        ? new Sturm(a)
-        : Sturm.adapt(this, a)
-    return res
+        ? aFrom
+        : Observable.from(this).chain(aFrom)
 }
+
+export const $ = Sturm
