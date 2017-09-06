@@ -19,7 +19,7 @@ export class Observable extends Broker {
     }
 
     chain(a) {
-
+        
     }
 
     subscribe(observer) {
