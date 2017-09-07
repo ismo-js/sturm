@@ -1,6 +1,17 @@
 {
-  "devDependencies": {
-    "lerna": "2.0.0-beta.24"
-  },
-  "license": "LGPL-3.0"
+    "name": "sturm-stream",
+    "description": "The sturm Streaming Tools",
+    "keywords": [
+        "sturm",
+        "stream",
+        "type"
+    ],
+    "version": "0.1.0",
+    "dependencies": {
+        "@cycle/run": "~3.2.0",
+        "xstream": "~10.9.0"
+    },
+    "devDependencies": {
+        "@types/node": "~7.0.43"
+    }
 }
