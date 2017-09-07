@@ -1,39 +1,41 @@
-type Stamp = number
 type Ms = number
 
-type Kind<
-      Elem> =
-    {[key :number /*Stamp*/]: Elem}
+abstract class Kind<Elem> {
+    [key :number /*Stamp*/]: Elem[]
+}
+
+interface KindInf<Elem> extends Kind<Elem> {}
 
 interface State<Elem> {
-    stamp :Stamp,
     time :Ms,
     elem :Elem,
 }
 
 type Father<Elem> = new(
-    state :State<Elem>,
+    state? :State<Elem>,
 )=> KindLike<Elem>
 
 type KindLike<Elem> =
-    Kind<Elem> | Iterable<Elem>
+    KindInf<Elem> | Iterator<Elem>
 type KindProd<Elem> =
     Father<Elem> | KindLike<Elem>
 
 class Stm {
-    static kind<
-          Elem>(
-    ): Function {
+
+}
+
+class Meta {
+    static kind<Elem>() {
         return function <
-              Target extends KindProd<Elem>>(
-            target :Target
+              Target extends Father<Elem>>(
+            target :Target,
         ) {
-            return class extends Stm {}
+            return target
         }
     }
 }
 
-@Stm.kind<number>()
-class X {
-
+@Meta.kind<number>()
+class X extends Kind<number> {
+    [0] = [1,4,7]
 }

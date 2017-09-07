@@ -5,9 +5,12 @@
         "typeRoots": ["node_modules/@types"],
         "outDir": "lib/",
 
+<<<<<<< HEAD
         "declaration": true,
         "declarationDir": "decl/",
 
+=======
+>>>>>>> 7c6c60f9ee4cac69eee91671c5fb888251c9c817
         "module": "commonjs",
         "target": "es2017",
         "lib": ["es2017"],
