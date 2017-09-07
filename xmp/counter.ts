@@ -1,6 +1,6 @@
 type Ms = number
-type Ob = Object
-const Ob = Object
+type O = Object
+const O = Object
 const Px = Proxy
 
 abstract class Kind<Elem> {
@@ -23,9 +23,9 @@ type KindLike<Elem> =
 type KindProd<Elem> =
     Father<Elem> | KindLike<Elem>
 
-class Stm {
+class Stm<Elem> {
     constructor() {
-        return new Px(this, new StmHand())
+        return new Px(this, new StmHand<Elem>())
     }
 
     byStamp(i :number) {
@@ -33,17 +33,25 @@ class Stm {
     }
 }
 
-class StmHand implements ProxyHandler<Stm> {
+class StmHand<Elem> implements ProxyHandler<Stm<Elem>> {
     get(
-        tgt :Stm,
+        tgt :Stm<Elem>,
         prop :string
-    ) {
+    ) :any {
+        function inProto<Tgt>(
+            tgt :Tgt,
+            prop :string,
+        ): prop is keyof Tgt {
+            const proto = O.getPrototypeOf(tgt)
+            return prop in proto
+        }
+
         const i :number = parseInt(prop)
         const isI :boolean = Number.isSaveInteger(i)
 
         if (isI) {
             return tgt.byStamp(i)
-        } else {
+        } else if (inProto(tgt, prop)) {
             return tgt[prop]
         }
     }
@@ -55,7 +63,7 @@ class Meta {
               Target extends Father<Elem>>(
             tgt :Target,
         ) {
-            return new Stm() as Target
+            return new Stm<Elem>()
             //…TODO! Is just Hack!
         }
     }
