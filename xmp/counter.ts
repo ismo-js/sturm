@@ -1,31 +1,38 @@
-type Type<
-      Key extends string,
-      Elem> =
-    {[key in Key]: Elem} & {[key :number]: Elem}
+type Ms = number
 
-type Typer = new(
-    tl? :any[]
-)=> {}
-type TypeLike<
-      Key extends string,
+type Kind<
       Elem> =
-    Typer | Type<Key, Elem>
+    {[key :number /*Stamp*/]: Elem}
 
-class Stream {
-    static proto<
-          Key extends string,
+interface State<Elem> {
+    stamp :Stamp,
+    time :Ms,
+    elem :Elem,
+}
+
+type Father<Elem> = new(
+    state :State<Elem>,
+)=> KindLike<Elem>
+
+type KindLike<Elem> =
+    Kind<Elem> | Iterable<Elem>
+type KindProd<Elem> =
+    Father<Elem> | KindLike<Elem>
+
+class Stm {
+    static kind<
           Elem>(
     ): Function {
         return function <
-              Target extends TypeLike<Key, Elem>>(
-            target :Target,
+              Target extends KindProd<Elem>>(
+            target :Target
         ) {
-            return class extends Stream {}
+            return class extends Stm {}
         }
     }
 }
 
-@Stream.proto<string, number>()
+@Stm.kind<number>()
 class X {
 
 }
