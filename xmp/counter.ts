@@ -1,4 +1,7 @@
 type Ms = number
+type Ob = Object
+const Ob = Object
+const Px = Proxy
 
 abstract class Kind<Elem> {
     [key :number /*Stamp*/]: Elem[]
@@ -21,21 +24,44 @@ type KindProd<Elem> =
     Father<Elem> | KindLike<Elem>
 
 class Stm {
+    constructor() {
+        return new Px(this, new StmHand())
+    }
 
+    byStamp(i :number) {
+
+    }
+}
+
+class StmHand implements ProxyHandler<Stm> {
+    get(
+        tgt :Stm,
+        prop :string
+    ) {
+        const i :number = parseInt(prop)
+        const isI :boolean = Number.isSaveInteger(i)
+
+        if (isI) {
+            return tgt.byStamp(i)
+        } else {
+            return tgt[prop]
+        }
+    }
 }
 
 class Meta {
     static kind<Elem>() {
         return function <
               Target extends Father<Elem>>(
-            target :Target,
+            tgt :Target,
         ) {
-            return target
+            return new Stm() as Target
+            //…TODO! Is just Hack!
         }
     }
 }
 
 @Meta.kind<number>()
 class X extends Kind<number> {
-    [0] = [1,4,7]
+    [0] = [1, 4, 7]
 }
