@@ -18,7 +18,7 @@ class Stream {
     ): Function {
         return function <
               Target extends TypeLike<Key, Elem>>(
-            target
+            target :Target,
         ) {
             return class extends Stream {}
         }
